@@ -10,6 +10,7 @@ class ClientInline(admin.StackedInline): #to do js to collapse inline
 class AdminVet(admin.ModelAdmin):
     fields = ['username', 'password', 'surname', 'name', 'clinic_name', \
               'clinic_adress', 'phone', 'email', 'www', 'description']
+    list_display = ('__unicode__','showClients')
     inlines = [ClientInline]
     
 class AdminClient(admin.ModelAdmin):

@@ -17,10 +17,11 @@ class Vet(models.Model):
 	password = models.CharField(max_length=45)
 	
 	def __unicode__(self):
-		return self.name + " " + self.surname + " (" + self.clinic_name + ")"; 
+		return self.name + " " + self.surname + " (" + self.username + ")"
 	
-	def getClients(self):
-		return self.client_set.get(pk=1)
+	def showClients(self):
+		return self.client_set.all()
+
 	
 class Client(models.Model):
 	
@@ -35,21 +36,21 @@ class Client(models.Model):
 	password = models.CharField(max_length=45)	
 	
 	def __unicode__(self):
-		return self.name + " " + self.surname; 
+		return self.name + " " + self.surname + " (" + self.username + ")"
 
 class Animal(models.Model):
 	
 	client = models.ForeignKey(Client)
 	species = models.CharField(max_length=120)
 	race = models.CharField(max_length=120, blank = True)
-	date_born = models.DateTimeField(blank = True)
+	date_born = models.DateField(blank = True, null=True)
 	color = models.CharField(max_length=45, blank = True)
-	photo = models.SlugField();
+	photo = models.SlugField(blank = True);
 	history = models.TextField(blank = True)
 	prognose = models.TextField(blank = True)
 	added = models.DateTimeField(default = datetime.now(), editable = False)
 	next_event = models.CharField(max_length=120, blank = True)
-	next_event_date = models.DateTimeField(blank = True)
+	next_event_date = models.DateTimeField(blank = True, null=True)
 	
 	def __unicode__(self):
 		return self.species + " " + self.race; 
