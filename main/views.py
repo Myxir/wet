@@ -15,7 +15,7 @@ def vets(request):
     #for vet in vetlist:
         #if not vet.client_set.all().isEmpty():
             
-    template = loader.get_template('main/index.html')
+    template = loader.get_template('main/weterynarze.html')
     context = Context({'vetlist' : vetlist,})
     return HttpResponse(template.render(context))
 
