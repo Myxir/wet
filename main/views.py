@@ -5,12 +5,19 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from main.models import Vet, Client, Animal
 from wet import settings
+from datetime import datetime
 
+def getDate():
+    a = str(datetime.today())[:11]
+    txt = a[8:10]+"."
+    txt += a[5:7]+"."
+    txt += a[0:4]
+    return txt
 
 def index(request):
     template = loader.get_template('main/index.html')
     title = "Strona główna"
-    context = Context({'title':title, 'STATIC_URL':settings.STATIC_URL})
+    context = Context({'title':title, 'STATIC_URL':settings.STATIC_URL, 'date':getDate()})
     return HttpResponse(template.render(context))
 
 def vets(request):
