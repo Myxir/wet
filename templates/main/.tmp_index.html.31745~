@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title>{{title}}</title>
+	</head>
+	<body>
+		<div style = "background-image:url('{{ STATIC_URL }}mock1_0002_bg.png')">lalalal</div>
+	</body>
+	
+	
+</html>

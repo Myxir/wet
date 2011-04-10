@@ -4,10 +4,14 @@
 from django.http import HttpResponse
 from django.template import Context, loader
 from main.models import Vet, Client, Animal
+from wet import settings
 
 
 def index(request):
-    return HttpResponse(u"Strona weterynarzy i ich klientów.<br><br> Witamy.")
+    template = loader.get_template('main/index.html')
+    title = "Strona główna"
+    context = Context({'title':title, 'STATIC_URL':settings.STATIC_URL})
+    return HttpResponse(template.render(context))
 
 def vets(request):
     vetlist = Vet.objects.all().order_by('-added')
