@@ -1,0 +1,22 @@
+<head>
+	<title>Zwierzak {{animal.species}} {{animal.race}}</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
+</head>
+
+<div>
+	<p>Dane zwierzęcia:</p>
+	<p>Właściciel: <a href=/klienci/{{client.pk}}>{{client}}</a></p>
+	<p>Weterynarz nadzorujący: <a href=/weterynarze/{{vet.pk}}>{{vet}}</a></p>
+	<p>Gatunek: {{animal.species}}</p>
+	<p>Rasa: {{animal.race}}</p>
+	<p>Wiek: {{wiek}}</p>
+	<p>Umaszczenie: {{animal.color}}</p>
+	<p>Zdjecie: {{animal.photo}}</p>
+	<p>Zaplanowane zdarzenie ({{animal.event_date}}): {{animal.event}} </p>
+	<p>Historia leczenia: {{animal.history|escape|linebreaks}}</p>
+	<p>Prognoza i zalecenia: {{animal.prognose}}</p>
+	<p>Dodany do bazy: {{animal.added}}</p>
+	
+	
+
+</div>

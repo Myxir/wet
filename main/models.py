@@ -1,42 +1,34 @@
 
 from django.db import models
+from django.contrib.auth.models import User
 from datetime import datetime
 
 class Vet(models.Model):
-	
-	surname = models.CharField(max_length=120)	
-	name = models.CharField(max_length=120)
+	user = models.OneToOneField(User)
 	www = models.URLField(blank = True)
-	email = models.EmailField(max_length=45)
 	clinic_name = models.CharField(max_length=120)
-	clinic_adress = models.CharField(max_length=120)
-	phone = models.CharField(max_length=45)
-	description = models.TextField(blank = True)
-	added = models.DateTimeField(default = datetime.now(), editable = False)
-	username = models.CharField(max_length=45, unique=True)
-	password = models.CharField(max_length=45)
-	
-	def __unicode__(self):
-		return self.name + " " + self.surname + " (" + self.username + ")"
+	clinic_adress = models.CharField(max_length=120, blank = False)
+	clinic_city = models.CharField(max_length=45, blank = False)
+	phone = models.CharField(max_length=45, blank = True)
 	
 	def showClients(self):
 		return self.client_set.all()
+	def __unicode__(self):
+		if(len(self.clinic_name)==0):
+			txt = self.user.first_name + " " +self.user.last_name
+		else:
+			txt = self.user.first_name + " " +self.user.last_name + " ("+self.clinic_name+")" 
+		return txt
 
 	
 class Client(models.Model):
-	
+	user = models.OneToOneField(User)
 	vet = models.ForeignKey(Vet)
-	name = models.CharField(max_length=120)
-	surname = models.CharField(max_length=120)
 	phone = models.CharField(max_length=45, blank = True)
-	email = models.EmailField(max_length=45, blank = True)
 	adress = models.CharField(max_length=120, blank = True)
-	added = models.DateTimeField(default = datetime.now(), editable = False)
-	username = models.CharField(max_length=45, unique=True)
-	password = models.CharField(max_length=45)	
 	
 	def __unicode__(self):
-		return self.name + " " + self.surname + " (" + self.username + ")"
+		return self.user.first_name +" " +self.user.last_name
 
 class Animal(models.Model):
 	
@@ -53,4 +45,6 @@ class Animal(models.Model):
 	next_event_date = models.DateTimeField(blank = True, null=True)
 	
 	def __unicode__(self):
-		return self.species + " " + self.race; 
+		return self.species + " " + self.race;
+	def age(self):
+		return datetime.today() #to do date calculation

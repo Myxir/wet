@@ -21,7 +21,7 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def vets(request):
-    vetlist = Vet.objects.all().order_by('-added')
+    vetlist = Vet.objects.all().order_by('-pk')
     #all_clients = []
     #for vet in vetlist:
         #if not vet.client_set.all().isEmpty():
@@ -32,16 +32,26 @@ def vets(request):
 
 def vet_details(request, vet_id):
     vet = Vet.objects.get(pk=vet_id)
-    return HttpResponse(u"Strona pojedynczego weterynarza o id %s:\
-     wszyscy jego klienci i podopieczni." %vet_id + "<br><br>" + vet.username)
+    clientlist = vet.client_set.all()
+    template = loader.get_template('main/weterynarze_details.html')
+    context = Context({'clientlist': clientlist, 'vet':vet, 'len':len(clientlist)})
+    return HttpResponse(template.render(context))
 
 def client_details(request, client_id):
     client = Client.objects.get(pk=client_id)
-    
-    return HttpResponse(u"Strona pojedynczego klienta  od id %s \
-    wraz z jego zwierzakami. odnośniki do lekarza i zwierzaków." %client_id + "<br><br>" + client.username)
+    vet = client.vet
+    animallist = client.animal_set.all()
+    template = loader.get_template('main/klient_details.html')
+    context = Context({'animallist': animallist, 'client':client, 'vet':vet})
+    return HttpResponse(template.render(context))
 
 def animal_details(request, animal_id):
     animal = Animal.objects.get(pk=animal_id)
-    return HttpResponse(u"Strona ze szczegółami zwierzaka od id %s, \
-    link do jego pana i lekarza." %animal_id + "<br><br>" + animal.species +" "+animal.race)
+    client = animal.client
+    vet = client.vet
+    age = animal.age()
+    template = loader.get_template('main/zwierzak_details.html')
+    context = Context({'wiek':age, 'animal':animal, 'client':client, 'vet':vet})
+    return HttpResponse(template.render(context));
+    
+    

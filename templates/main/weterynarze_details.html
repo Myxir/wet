@@ -1,0 +1,23 @@
+	<head>
+		<title>Weterynarz {{vet.user.first_name}} {{vet.user.last_names}}</title>
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
+	</head>
+
+<h2>Szczegółowe informacje dla weterynarza:<h2> 
+<p>{{vet.user.first_name}}<br>{{vet.user.last_name}}<p>
+
+<p>Nazwa kliniki: {{vet.clinic_name}}<p>
+<p>Adres kliniki: {{vet.clinic_adress}} {{vet.clinic_city}}<p>
+<p>Ilość klientów: {{len}}</p>
+<div>
+	{% for client in clientlist%}		
+		<li><a href=/klienci/{{client.pk}}>{{client.user.first_name}} {{client.user.last_name}}</a></li>
+		{% for animal in client.animal_set.all %}
+			<p><a href =/zwierzaki/{{animal.pk}}>
+			{{animal.species}}
+			{{animal.race}}
+			</a>
+			<p>
+		{% endfor %}
+	{% endfor %}
+</div>

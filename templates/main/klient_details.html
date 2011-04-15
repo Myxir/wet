@@ -1,0 +1,23 @@
+<head>
+	<title>Klient {{client.user.first_name}} {{client.user.last_name}}</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
+</head>
+
+<p>Lista pupili:</p>
+{% if animallist %}
+    <ul>
+    {% for animal in animallist %}
+        <li><a href=/zwierzaki/{{animal.pk}}>
+        	<p>{{animal.species}} {{animal.race}}</p>
+        </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Ten klient nie ma pupili.</p>
+{% endif %}
+
+<p>Weterynarz doglądający tych zwierząt: 
+<a href=/weterynarze/{{vet.pk}}>
+	{{vet.user.first_name}} 
+	{{vet.user.last_name}}
+</a></p>

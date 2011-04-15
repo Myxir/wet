@@ -1,10 +1,18 @@
-
+	<head>
+		<title>Weterynarze</title>
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
+	</head>
+	
 <h1>Baza polskich weterynarzy.</h1>
 <h2>Lista zarejestrowanych lekarzy:</h2>
 {% if vetlist %}
     <ul>
     {% for vet in vetlist %}
-        <li>{{ vet.name }} {{vet.surname}} {{vet.clinic_name}}</li>
+        <li><a href=/weterynarze/{{vet.pk}}>
+        {{ vet.user.first_name }} 
+        {{vet.user.last_name}} 
+        {{vet.clinic_name}}
+        </a></li>
     {% endfor %}
     </ul>
 {% else %}
