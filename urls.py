@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.views import login, logout
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -20,6 +21,8 @@ urlpatterns = patterns('',
     (r'^weterynarze/(?P<vet_id>\d+)/$', 'wet.main.views.vet_details'),
     (r'^klienci/(?P<client_id>\d+)/$', 'wet.main.views.client_details'),
     (r'^zwierzaki/(?P<animal_id>\d+)/$', 'wet.main.views.animal_details'),
+    (r'^login/$',  login, {'template_name': 'main/login.html'}),
+    (r'^logout/$', logout, {'template_name': 'main/logout.html'}),
     
 )
 

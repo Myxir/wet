@@ -14,11 +14,7 @@ class Vet(models.Model):
 	def showClients(self):
 		return self.client_set.all()
 	def __unicode__(self):
-		if(len(self.clinic_name)==0):
-			txt = self.user.first_name + " " +self.user.last_name
-		else:
-			txt = self.user.first_name + " " +self.user.last_name + " ("+self.clinic_name+")" 
-		return txt
+		return self.user.username
 
 	
 class Client(models.Model):
@@ -31,7 +27,7 @@ class Client(models.Model):
 		return self.user.first_name +" " +self.user.last_name
 
 class Animal(models.Model):
-	
+	name = models.CharField(max_length=120)
 	client = models.ForeignKey(Client)
 	species = models.CharField(max_length=120)
 	race = models.CharField(max_length=120, blank = True)
