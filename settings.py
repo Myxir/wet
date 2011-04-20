@@ -111,6 +111,9 @@ TEMPLATE_DIRS = (
     "/media/22C7-53F9/dev/eclipse_workspace/wet/wet/templates" #to do dynamic pathing
 )
 
+AUTH_PROFILE_MODULE = "main.Vet"
+SESSION_COOKIE_DOMAIN = "127.0.0.1"
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
