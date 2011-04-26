@@ -65,3 +65,4 @@ def animal_details(request, animal_id):
     age = animal.age()
     context = Context({'wiek':age, 'animal':animal, 'client':client, 'vet':vet})
     return render_to_response('main/zwierzak_details.html', context);
+
