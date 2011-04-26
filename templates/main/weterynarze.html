@@ -1,19 +1,22 @@
-	<head>
-		<title>Weterynarze</title>
-		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
-	</head>
-	
-<p>Baza polskich weterynarzy.</p>
-<p>Lista zarejestrowanych lekarzy:</p>
-{% if vetlist %}
-    <ul>
-    {% for vet in vetlist %}
-        <li><a href=/weterynarze/{{vet.pk}}>
-        {{ vet.user.first_name}} 
-        </a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Brak weterynarzy w bazie.</p>
-{% endif %}
-<p>{{ log }}</p>
+{% extends "main/index.html" %}
+
+{% block title %} WetNet - Weterynarze {% endblock %}
+
+{% block content %}
+	<div id="content">	
+		<p>Baza polskich weterynarzy.</p>
+		<p>Lista zarejestrowanych lekarzy:</p>
+		{% if vetlist %}
+		    <ul>
+		    {% for vet in vetlist %}
+		        <li><a href=/weterynarze/{{vet.pk}}>
+		        {{ vet.user.first_name}} 
+		        </a></li>
+		    {% endfor %}
+		    </ul>
+		{% else %}
+		    <p>Brak weterynarzy w bazie.</p>
+		{% endif %}
+		<p>{{ log }}</p>
+	</div>
+{% endblock %}

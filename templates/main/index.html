@@ -1,23 +1,22 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 	<head>
-		<title>{{title}}</title>
+		<title>{%block title%}WetNet{%endblock%}</title>
 		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
 	</head>
 	<body>
 		<div id="main">
 			<img id="background" src="{{STATIC_URL}}img/mock1_0001_Layer-1.png"/>
-            <div id="downlabel" style="background-image:url('{{STATIC_URL}}img/mock1_0000_Layer-2.png');">
-                <img src="{{STATIC_URL}}img/mock1_0000_Layer-2.png">
-            </div>
-            <div id="uplabel" style="background-image:url('{{STATIC_URL}}img/mock1_0000_Layer-UP2.png');">
-                <img src="{{STATIC_URL}}img/mock1_0000_Layer-UP2.png" />
-            </div>
-            <div id="logon"><img src="{{STATIC_URL}}img/logon_0000_Shape-1.png"></div>
-            <div id="downtext">Informacje | Kontakt | Costam</div>
-            <div id="arr">2011 Mateusz Banaszkiewicz</div>
-            <div id="time">{{date}}</div>
-            <div id="text"><p>Witamy w bazie weterynarzy.</p><p> Proszę wybrać rodzaj konta i zalogować się</p> lub
-            przeprowadzić rejestrację.</p> </div>
+			<img id="uplabel" src="{{STATIC_URL}}img/mock1_0000_Layer-UP2.png" />
+            
+            {%block content%}
+            <div id="content"><h2>WetNet - miejsce dla weterynarzy i ich klientów</h2></div>
+            {%endblock%}
+            <img id="downlabel" src="{{STATIC_URL}}img/mock1_0000_Layer-2.png">
+            <div id="downtext">Informacje | Kontakt | Linki </br> 2011 Mateusz Banaszkiewicz</div>
+            <div id="time">Dzisiejsza data:<br>&nbsp&nbsp&nbsp{{date}}</div>
+            <div id="logged">{% autoescape off %} {{logged}} {% endautoescape %} </div>
 		</div>
         
 	</body>

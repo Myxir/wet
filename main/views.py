@@ -18,18 +18,21 @@ def getDate():
     return txt
 
 def index(request):
-    title = "Strona główna"
-    context = Context({'title':title, 'STATIC_URL':settings.STATIC_URL, 'date':getDate()})
+    if(request.user.is_authenticated()):
+        txt = "Zalogowany jako: </br>" + request.user.username
+    else:
+        txt = "Zaloguj / Zarejestruj"
+    context = Context({'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/index.html',context)
 
 def vets(request):
     vetlist = Vet.objects.all().order_by('-pk')
     
     if(request.user.is_authenticated()):
-        txt = "logged in " + request.user.username
+        txt = "Zalogowany jako: </br>" + request.user.username
     else:
-        txt = "not logged"
-    context = Context({'vetlist' : vetlist, "log":txt})
+        txt = "Zaloguj / Zarejestruj"
+    context = Context({'vetlist' : vetlist, "log":txt, 'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/weterynarze.html',context)
 
 def vet_details(request, vet_id):
@@ -38,10 +41,15 @@ def vet_details(request, vet_id):
     except Vet.DoesNotExist:
         raise Http404
     
+    if(request.user.is_authenticated()):
+        txt = "Zalogowany jako: </br>" + request.user.username
+    else:
+        txt = "Zaloguj / Zarejestruj"
+    
     if(request.user.is_authenticated and \
-    request.user.username == vet.user.username):    
+    (request.user.username == vet.user.username or request.user.is_staff)):
         clientlist = vet.client_set.all()
-        context = Context({'clientlist': clientlist, 'vet':vet, 'len':len(clientlist)})
+        context = Context({'clientlist': clientlist, 'vet':vet, 'len':len(clientlist),'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
         return render_to_response('main/weterynarze_details.html',context)
     else:
         return HttpResponse('brak uprawnien')
@@ -50,9 +58,13 @@ def client_details(request, client_id):
         client = Client.objects.get(pk=client_id)
     except Client.DoesNotExist:
         raise Http404
+    if(request.user.is_authenticated()):
+        txt = "Zalogowany jako: </br>" + request.user.username
+    else:
+        txt = "Zaloguj / Zarejestruj"
     vet = client.vet
     animallist = client.animal_set.all()
-    context = Context({'animallist': animallist, 'client':client, 'vet':vet})
+    context = Context({'animallist': animallist, 'client':client, 'vet':vet,'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/klient_details.html', context)
 
 def animal_details(request, animal_id):
@@ -60,9 +72,13 @@ def animal_details(request, animal_id):
         animal = Animal.objects.get(pk=animal_id)
     except Animal.DoesNotExist:
         raise Http404
+    if(request.user.is_authenticated()):
+        txt = "Zalogowany jako: </br>" + request.user.username
+    else:
+        txt = "Zaloguj / Zarejestruj"
     client = animal.client
     vet = client.vet
     age = animal.age()
-    context = Context({'wiek':age, 'animal':animal, 'client':client, 'vet':vet})
+    context = Context({'wiek':age, 'animal':animal, 'client':client, 'vet':vet,'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/zwierzak_details.html', context);
 

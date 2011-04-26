@@ -6,78 +6,84 @@ body
 
 #main
 {
-	width: 1240px;
-	height: 600px;
+	width: 1024px;
     margin: 0 auto;
 }
 
 #background
 {	
-	position: relative;
-	top:90px;
-	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #downlabel
 {
     width:100%;
-    position: absolute;
+	height:10%;
+    position: fixed;
     bottom: 0px;
     left: 0px;
-    padding: 0;
+	
 }
 
 #uplabel
 {
     width:100%;
-    position: absolute;
+	height: 10%;
+    position: fixed;
     top: 0px;
     left: 0px;
-    padding: 0;
 }
 
-#logon
-{
-    position: fixed;
-    top: 30%px;
-    left: 33%;
-    text-align:center;
-}
 
 #downtext
 {
     position: fixed;
     text-align:justify;
-    bottom:5%;
+    bottom:3%;
     left:42.5%;
-    font-size:xx-large;
+    font-size:larger;
     font-weight:bold;
     font-family:MS Sans Serif;
     width:100%;
     color: White;
 }
 
-#arr
+#content
 {
-     position: fixed;
-    text-align:justify;
-    bottom:2.5%;
-    left:42%;
-    font-size:xx-large;
-    font-weight:bold;
-    font-family:MS Sans Serif;
-    width:100%;
-    color: White;
-}
-    
+	background-color: white;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: outset;
+	border-color: gray;
+	border-width: 5px;
+	position: relative;
+	top: -450px;
 	
+}
+
 #time
 {
 	position:fixed;
 	top:2%;
 	left:2%;
-	font-size:xx-large;
-    font-family:MS Sans Serif;
+	font-size:larger;
+    font:"Bodoni MT Black";
     width:100%;
     color: White;
+	text-align:justify;
+}
+
+#logged
+{
+	position:fixed;
+	top:2%;
+	left:88%;
+	font-size:larger;
+    font:"Bodoni MT Black";
+    width:100%;
+    color: White;
+	text-align:justify;
+	
 }
