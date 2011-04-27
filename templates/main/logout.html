@@ -1,3 +1,14 @@
-<META HTTP-EQUIV=Refresh CONTENT="3; URL=/weterynarze">
-</p> wylogowano</p>
+{% extends "main/index.html" %}
+
+{% block title %} WetNet - Wylogowane {% endblock %}
+{% block refresh %}
+	<META HTTP-EQUIV="Refresh" CONTENT="3;URL=/">
+{% endblock %}
+{% block content %}
+  <div id="content">	
+  <p>Dziękujemy za korzystanie z serwisu.</p>
+  <p>Za chwilę zostaniesz wylogowany</p>
+  </div>
+
+{% endblock %}
 

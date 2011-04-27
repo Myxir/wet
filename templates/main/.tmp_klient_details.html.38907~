@@ -1,0 +1,28 @@
+{% extends "main/index.html" %}
+
+{% block title %} {{ client }} {% endblock %}
+
+{%block content %}
+	<div id="content">
+		<p>Imię: {{ client.user.first_name }}</p>
+		<p>Nazwisko: {{ client.user.last_name }}</p>
+		<p>Lista pupili:</p>
+		{% if animallist %}
+		    <ul>
+		    {% for animal in animallist %}
+		        <li><a href=/zwierzaki/{{animal.pk}}>
+		        	<p>{{animal.species}} {{animal.race}}</p>
+		        </a></li>
+		    {% endfor %}
+		    </ul>
+		{% else %}
+		    <p>Ten klient nie ma pupili.</p>
+		{% endif %}
+		
+		<p>Weterynarz doglądający tych zwierząt: 
+		<a href=/weterynarze/{{vet.pk}}>
+			{{vet.user.first_name}} 
+			{{vet.user.last_name}}
+		</a></p>
+	</div>
+{% endblock %}

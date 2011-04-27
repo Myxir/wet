@@ -4,7 +4,6 @@
 	<head>
 		<title>{%block title%}WetNet{%endblock%}</title>
 		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/index.css">
-		{%block refresh %} {% endblock %}
 	</head>
 	<body>
 		<div id="main">
@@ -15,7 +14,7 @@
             <div id="content"><h2>WetNet - miejsce dla weterynarzy i ich klientów</h2></div>
             {%endblock%}
             <img id="downlabel" src="{{STATIC_URL}}img/mock1_0000_Layer-2.png">
-            <div id="downtext">Informacje | Linki | Kontakt </br> 2011 Mateusz Banaszkiewicz</div>
+            <div id="downtext">Informacje | Kontakt | Linki </br> 2011 Mateusz Banaszkiewicz</div>
             <div id="time">Dzisiejsza data:<br>&nbsp&nbsp&nbsp{{date}}</div>
             <div id="logged">{% autoescape off %} {{logged}} {% endautoescape %} </div>
 		</div>

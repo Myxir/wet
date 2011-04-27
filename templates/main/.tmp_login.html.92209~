@@ -1,24 +1,21 @@
-{% extends "main/index.html" %}
 
-{% block title %} WetNet - Autoryzacja {% endblock %}
 
 {% block content %}
 {% csrf_token %}
-  <div id="content">	
+
   {% if form.errors %}
-    <p class="error">Zła nazwa użytkownika lub hasło.</p>
+    <p class="error">Sorry, that's not a valid username or password</p>
   {% endif %}
 
   <form action="" method="post">
   {% csrf_token %}
-    <label for="username">Nazwa użytkownika:</label>
+    <label for="username">User name:</label>
     <input type="text" name="username" value="" id="username">
-    <label for="password">Hasło:</label>
+    <label for="password">Password:</label>
     <input type="password" name="password" value="" id="password">
 
     <input type="submit" value="login" />
     <input type="hidden" name="next" value="/weterynarze" />
   </form>
-  </div>
 
 {% endblock %}

@@ -10,12 +10,13 @@
 		    <ul>
 		    {% for vet in vetlist %}
 		        <li><a href=/weterynarze/{{vet.pk}}>
-		        {{ vet }} 
+		        {{ vet.user.first_name}} 
 		        </a></li>
 		    {% endfor %}
 		    </ul>
 		{% else %}
 		    <p>Brak weterynarzy w bazie.</p>
 		{% endif %}
+		<p>{{ log }}</p>
 	</div>
 {% endblock %}
