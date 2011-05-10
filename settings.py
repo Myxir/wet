@@ -72,7 +72,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/media/44D8C28A2A2DF770/dev/django1.3/wet/wet/main/static/',
+    '/media/22C7-53F9/dev/eclipse_workspace/wet/wet/main/static/',
 
 )
 
@@ -108,7 +108,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/media/44D8C28A2A2DF770/dev/django1.3/wet/wet/templates" #to do dynamic pathing
+    "/media/22C7-53F9/dev/eclipse_workspace/wet/wet/templates" #to do dynamic pathing
 )
 
 AUTH_PROFILE_MODULE = "main.Vet"

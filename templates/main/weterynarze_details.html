@@ -4,29 +4,29 @@
 
 {%block content %}
 	<div id="content">
-		<p>Weterynarz {{vet.user.first_name}} {{vet.user.last_name}}<p> 
+		<p>Weterynarz {{vet.user.first_name}} {{vet.user.last_name}}</p> 
+		<p>Nazwa użytkownika: {{vet.user.username}}</p>
 		{% ifnotequal vet.clinic_name '' %}
-			<p>Nazwa kliniki: {{vet.clinic_name}}<p>
+			<p>Nazwa kliniki: {{vet.clinic_name}}</p>
 		{% endifnotequal %}
 		{% ifnotequal vet.www '' %}
 			<p>Strona internetowa: <a href ="{{vet.www}}" target = _blank>{{vet.www}}</a><p>
 		{% endifnotequal %}
-		<p>Adres kliniki: {{vet.clinic_adress}}, {{vet.clinic_city}}</p>
-		<p>
-			<a href="http://www.zumi.pl/namapie.html?loc={{vet.clinic_city}}%2C+{{vet.clinic_adress}}&Submit=Szukaj&src=1" 
+		<p>Adres kliniki: {{vet.clinic_adress}}, {{vet.clinic_city}}
+			<a target=blank_ href="http://www.zumi.pl/namapie.html?loc={{vet.clinic_city}}%2C+{{vet.clinic_adress}}&Submit=Szukaj&src=1" 
 			title="weterynarz na mapie" 
 			style="display:block; width:149px; height:23px; 
 			background:url(http://www.zumi.pl/_d/wizard/zumi_02.gif) 
 			no-repeat; font: bold 12px Verdana, sans-serif;  color:#fff; 
 			text-align:center; text-decoration:none; padding-top:3px;">
 			Pokaż na mapie &#187;</a>
-		<p>
+		<p/>
 		<p>Telefon kontaktowy: {{vet.phone}}</p>
-		<p>Ilość klientów: {{len}}</p>
 		{% ifnotequal vet.user.email '' %}
-			<p>Adres email: {{vet.user.email}}<p>
+			<p>Adres email: {{vet.user.email}}</p>
 		{% endifnotequal %}
 		
+		<p>Ilość klientów: {{len}}</p>
 		<div>
 			{% ifnotequal clientlist 'false' %}
 				{% for client in clientlist%}		
@@ -34,6 +34,8 @@
 				{% endfor %}
 			{% endifnotequal %}
 		</div>
+		
+		
 	</div>
 
 {% endblock %}

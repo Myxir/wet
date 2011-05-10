@@ -8,14 +8,33 @@
 		<p>Lista zarejestrowanych lekarzy:</p>
 		{% if vetlist %}
 		    <ul>
-		    {% for vet in vetlist %}
-		        <li><a href=/weterynarze/{{vet.pk}}>
-		        {{ vet }} 
-		        </a></li>
-		    {% endfor %}
+		    	{% for vet in vetpag.object_list %}
+    				{# Each "contact" is a Contact model object. #}
+    				<a href="/weterynarze/{{vet.pk}}">
+    					{{ vet.user.first_name }} {{ vet.user.last_name }} 
+    				</a>
+    				<br />
+				{% endfor %}
 		    </ul>
 		{% else %}
 		    <p>Brak weterynarzy w bazie.</p>
 		{% endif %}
+		
+<div align="center" class="pagination">
+    <span class="step-links">
+        {% if vetpag.has_previous %}
+            <a href="?page={{ vetpag.previous_page_number }}"><<</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ vetpag.number }} z {{ vetpag.paginator.num_pages }}.
+        </span>
+
+        {% if vetpag.has_next %}
+            <a href="?page={{ vetpag.next_page_number }}">>></a>
+        {% endif %}
+    </span>
+</div>
+		
 	</div>
 {% endblock %}
