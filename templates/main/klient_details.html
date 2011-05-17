@@ -3,26 +3,36 @@
 {% block title %} {{ client }} {% endblock %}
 
 {%block content %}
-	<div id="content">
-		<p>Imię: {{ client.user.first_name }}</p>
-		<p>Nazwisko: {{ client.user.last_name }}</p>
-		<p>Lista pupili:</p>
-		{% if animallist %}
-		    <ul>
-		    {% for animal in animallist %}
-		        <li><a href=/zwierzaki/{{animal.pk}}>
-		        	<p>{{animal.species}} {{animal.race}}</p>
-		        </a></li>
-		    {% endfor %}
-		    </ul>
-		{% else %}
-		    <p>Ten klient nie ma pupili.</p>
-		{% endif %}
-		
-		<p>Weterynarz doglądający tych zwierząt: 
-		<a href=/weterynarze/{{vet.pk}}>
-			{{vet.user.first_name}} 
-			{{vet.user.last_name}}
-		</a></p>
-	</div>
+	{% ifequal vet 'false' %}
+		<div id="content">
+			<p>Brak uprawnień aby wyświetlić dane tego klienta!</p>
+			<p>Musisz zalogować się jako jego weterynarz, ten klient, lub administrator!<p>
+		</div>
+	{% endifequal %}
+	{% ifnotequal vet 'false' %}
+		<div id="content">
+			<p>Imię: {{ client.user.first_name }}</p>
+			<p>Nazwisko: {{ client.user.last_name }}</p>
+			<p>Lista pupili:</p>
+			<a href=/nowy_pupil>+dodaj zwierzaka</a>
+					<p></p>
+			{% if animallist %}
+			    <ul>
+			    {% for animal in animallist %}
+			        <li><a href=/zwierzaki/{{animal.pk}}>
+			        	<p>{{animal.species}} {{animal.race}}</p>
+			        </a></li>
+			    {% endfor %}
+			    </ul>
+			{% else %}
+			    <p>Ten klient nie ma pupili.</p>
+			{% endif %}
+			
+			<p>Weterynarz doglądający tych zwierząt: 
+			<a href=/weterynarze/{{vet.pk}}>
+				{{vet.user.first_name}} 
+				{{vet.user.last_name}}
+			</a></p>
+		</div>
+	{% endifnotequal %} 
 {% endblock %}

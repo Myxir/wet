@@ -11,14 +11,14 @@ from django.http  import Http404
 from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def auth(request):
+def auth(request): http://stackoverflow.com/questions/3463240/check-if-onetoonefield-is-none-in-django
     if(request.user.is_authenticated()):
         user = request.user
-        pk = user.pk
-        txt = "zalogowano jako: </br>" + "<a href=/weterynarze/"+str(pk)+">"+user.first_name+" "+user.last_name +"</a>"+\
-        "</br><a href=/logout>wyloguj</a>"
+        if(user.vet)
+        txt = "zalogowano jako: </br>" + "<a id=\"light\" href=/weterynarze/"+str(user.pk)+">"+user.username +"</a>"+\
+        "</br><a id=\"light\" href=/logout>wyloguj</a>"
     else:
-        txt = "<a href=/login>zaloguj / zarejestruj</a>"
+        txt = "<a id=\"light\" href=/login>zaloguj / zarejestruj</a>"
     return txt
 
 def getDate():
@@ -37,7 +37,7 @@ def vets(request):
     vetlist = Vet.objects.all().order_by('-pk')
     
     txt = auth(request)    
-    paginator = Paginator(vetlist, 5) # Show 25 contacts per page
+    paginator = Paginator(vetlist, 10) # Show 25 contacts per page
     
     page = request.GET.get('page')
     try:
@@ -76,8 +76,14 @@ def client_details(request, client_id):
     except Client.DoesNotExist:
         raise Http404
     txt = auth(request)
-    vet = client.vet
-    animallist = client.animal_set.all()
+    if not (request.user.is_authenticated and \
+    (request.user.username == client.user.username \
+     or request.user.username == client.vet.user.username or request.user.is_staff)):
+        vet = 'false'
+        animallist = []
+    else:
+        vet = client.vet
+        animallist = client.animal_set.all()
     context = Context({'animallist': animallist, 'client':client, 'vet':vet,'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/klient_details.html', context)
 
@@ -87,9 +93,16 @@ def animal_details(request, animal_id):
     except Animal.DoesNotExist:
         raise Http404
     txt = auth(request)
-    client = animal.client
-    vet = client.vet
-    age = animal.age()
+    if not (request.user.is_authenticated and \
+    (request.user.username == animal.client.user.username \
+     or request.user.username == animal.client.vet.user.username or request.user.is_staff)):
+        client = 'false'
+        vet = 'false'
+        age = 'false'
+    else:
+        client = animal.client
+        vet = client.vet
+        age = animal.age()
     context = Context({'wiek':age, 'animal':animal, 'client':client, 'vet':vet,'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/zwierzak_details.html', context);
 
