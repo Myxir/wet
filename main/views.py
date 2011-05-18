@@ -11,11 +11,22 @@ from django.http  import Http404
 from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def auth(request): http://stackoverflow.com/questions/3463240/check-if-onetoonefield-is-none-in-django
+def profileLink(user):
+    try:
+        getattr(user, 'client')
+        return (user.username, 'klienci/'+str(user.client.pk))
+    except Client.DoesNotExist:
+        try:
+            getattr(user, 'vet')
+            return (user.username ,'weterynarze/'+str(user.vet.pk))
+        except Vet.DoesNotExist:
+            return (user.username, "")
+
+def auth(request):
     if(request.user.is_authenticated()):
         user = request.user
-        if(user.vet)
-        txt = "zalogowano jako: </br>" + "<a id=\"light\" href=/weterynarze/"+str(user.pk)+">"+user.username +"</a>"+\
+        profile = profileLink(user)
+        txt = "zalogowano jako: </br>" + "<a id=\"light\" href=/"+ profile[1] +">"+ profile[0] +"</a>"+\
         "</br><a id=\"light\" href=/logout>wyloguj</a>"
     else:
         txt = "<a id=\"light\" href=/login>zaloguj / zarejestruj</a>"
