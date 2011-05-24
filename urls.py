@@ -27,6 +27,8 @@ urlpatterns = patterns('',
     (r'^zwierzaki/(?P<animal_id>\d+)/$', 'wet.main.views.animal_details'),
     (r'^login/$',  login, {'template_name': 'main/login.html', 'extra_context':{'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt}}),
     (r'^logout/$', logout, {'template_name': 'main/logout.html', 'extra_context':{'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt}}),
+    (r'^nowy_klient/$','wet.main.views.new_client'),
+    (r'^nowy_pupil/$','wet.main.views.new_animal'),
     
 )
 

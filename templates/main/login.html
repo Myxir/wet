@@ -4,21 +4,31 @@
 
 {% block content %}
 {% csrf_token %}
-  <div id="content">	
-  {% if form.errors %}
-    <p class="error">Zła nazwa użytkownika lub hasło.</p>
-  {% endif %}
-
-  <form action="" method="post">
-  {% csrf_token %}
-    <label for="username">Nazwa użytkownika:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Hasło:</label>
-    <input type="password" name="password" value="" id="password">
-
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="/weterynarze" />
-  </form>
+  <div id="content">
+	  <div id="logowanie">
+	  	  <p align="center"><STRONG>Logowanie</STRONG></p>	
+		  {% if form.errors %}
+		    <p class="error">Zła nazwa użytkownika lub hasło.</p>
+		  {% endif %}
+		  
+		  <form align="center" action="" method="post">
+		  {% csrf_token %}
+		    <label for="username">Nazwa użytkownika:</label>
+		    <input type="text" name="username" value="" id="username">
+		    <label for="password">Hasło:</label>
+		    <input type="password" name="password" value="" id="password">
+		
+		    <input type="submit" value="login" />
+		    <input type="hidden" name="next" value="/weterynarze" />
+		  </form>
+		  <p align="center">...................................................................................................................................................................................</p>
+	  </div>
+	  
+	  <div id="rejestracja">
+	  		<p></p>
+	  		<p align="center"><a href="/register"><STRONG>>> Zarejestruj się <<</STRONG></a></p>
+	  </div>
+	  
   </div>
 
 {% endblock %}

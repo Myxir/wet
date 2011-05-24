@@ -5,7 +5,6 @@
 {%block content %}
 	<div id="content">
 		<p>Weterynarz {{vet.user.first_name}} {{vet.user.last_name}}</p> 
-		<p> klucz glowny: {{vet.user.pk}} </p>
 		<p>Nazwa użytkownika: {{vet.user.username}}</p>
 		{% ifnotequal vet.clinic_name '' %}
 			<p>Nazwa kliniki: {{vet.clinic_name}}</p>

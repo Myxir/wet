@@ -117,4 +117,13 @@ def animal_details(request, animal_id):
     context = Context({'wiek':age, 'animal':animal, 'client':client, 'vet':vet,'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
     return render_to_response('main/zwierzak_details.html', context);
 
+def new_client(request):
+    txt = auth(request)
+    context = ({'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
+    return render_to_response('main/new_client.html',context);
+
+def new_animal(request):
+    txt = auth(request)
+    context = ({'STATIC_URL':settings.STATIC_URL, 'date':getDate(), 'logged':txt})
+    return render_to_response('main/new_animal.html',context);
     
